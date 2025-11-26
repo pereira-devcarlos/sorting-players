@@ -67,6 +67,11 @@ Exemplo:
 ```bash
 ./programa 2
 ```
+---
+
+## Requisitos para Compilação
+* GCC ou qualquer compilador compatível com C99
+* Make
 
 ---
 
@@ -102,17 +107,6 @@ sorting-players/
  ┣ Makefile
  ┗ README.md
 ```
-
----
-
-## Requisitos
-
-* Implementação em linguagem C
-* Não utilizar bibliotecas externas ou STL do C++
-* Makefile funcional (compila com `make all`)
-* Execução correta em ambiente Linux
-* Algoritmos implementados manualmente
-* Métricas de desempenho contabilizadas corretamente
 
 ---
 
