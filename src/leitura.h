@@ -1,6 +1,13 @@
 #ifndef LEITURA_H
 #define LEITURA_H
 
-// Declarar as funções de leitura aqui
+// Definição da estrutura Jogador
+typedef struct {
+    char nome[100];
+    char posicao[50];
+    char naturalidade[100];
+    char clube[50];
+    int idade;
+} Jogador;
 
 #endif // LEITURA_H
