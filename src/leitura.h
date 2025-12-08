@@ -10,4 +10,7 @@ typedef struct {
     int idade;
 } Jogador;
 
+// Função para carregar jogadores a partir de um arquivo externo
+int carregar_jogadores(const char *arquivo, Jogador **vetor);
+
 #endif // LEITURA_H
