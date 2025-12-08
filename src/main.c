@@ -12,7 +12,8 @@ int main(int argc, char const *argv[]){
 
     Metricas m = {0, 0, 0};
     clock_t inicio = clock();
-    bubbleSort(jogadores, n, &m);
+    // Testando o Merge Sort
+    mergeSort(jogadores, 0, n - 1, &m);
     clock_t fim = clock();
 
     double tempo_ms = (double)(fim - inicio) / CLOCKS_PER_SEC * 1000.0;

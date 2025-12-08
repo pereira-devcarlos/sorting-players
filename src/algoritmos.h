@@ -15,6 +15,8 @@ char ehAcentuado(unsigned char c1, unsigned char c2);
 void normalizar(char *str);
 int compararNomes(const char *a, const char *b, Metricas *m);
 void bubbleSort(Jogador *v, int n, Metricas *m);
+void merge(Jogador *v, int l, int m, int r, Metricas *met);
+void mergeSort(Jogador *v, int l, int r, Metricas *met);
 void countingSortChar(Jogador *v, int n, int pos, Metricas *m);
 void radixSortNomes(Jogador *v, int n, Metricas *m);
 

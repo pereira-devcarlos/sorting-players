@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include "algoritmos.h"
 
-#define MAX 256   // máx. valores de caracteres para counting sort
+#define MAX 256 // máx. valores de caracteres para counting sort
 
 // Função para mapear caracteres UTF-8 acentuados para suas versões sem acento
 char ehAcentuado(unsigned char c1, unsigned char c2) {
@@ -64,31 +64,39 @@ void normalizar(char *str) {
 }
 
 // Compara nomes normalizando antes
-int compararNomes(const char *a, const char *b, Metricas *m) {
+int compararNomes(const char *a, const char *b, Metricas *m){
     char na[128], nb[128];
     strcpy(na, a);
     strcpy(nb, b);
 
+    // Normaliza os nomes antes de comparar
     normalizar(na);
     normalizar(nb);
 
+    // Contabiliza a comparação
     m->comparacoes++;
     return strcmp(na, nb);
 }
 
+// BUBBLE SORT — ordenação simples para comparação
 void bubbleSort(Jogador *v, int n, Metricas *m) {
-    int trocou = 1;
+    // Memória usada para a variável temporária
+    m->memoria += sizeof(Jogador);
+
+    // Para sinalizar se houver troca
+    int trocou = 1; // 1 = true
 
     for (int i = 0; i < n - 1 && trocou; i++) {
-        trocou = 0;
+        trocou = 0; // 0 = false
 
         for (int j = 0; j < n - i - 1; j++) {
-
+            // Comparar nomes dos jogadores e trocar se necessário
             if (compararNomes(v[j].nome, v[j + 1].nome, m) > 0) {
                 Jogador tmp = v[j];
                 v[j] = v[j + 1];
                 v[j + 1] = tmp;
 
+                // Contabiliza a troca
                 m->trocas++;
                 trocou = 1;
             }
@@ -96,8 +104,70 @@ void bubbleSort(Jogador *v, int n, Metricas *m) {
     }
 }
 
+// Função auxiliar para o Merge Sort
+void merge(Jogador *v, int l, int m, int r, Metricas *met) {
+    // Tamanhos dos subarrays
+    int n1 = m - l + 1;
+    int n2 = r - m;
 
-// Counting Sort para ordenar jogadores pelo caractere de posição 'pos'
+    // Atualiza uso de memória
+    met->memoria += (n1 + n2) * sizeof(Jogador);
+
+    // Alocar memória para os subarrays
+    Jogador *L = malloc(n1 * sizeof(Jogador));
+    Jogador *R = malloc(n2 * sizeof(Jogador));
+
+    // Copiar dados para os subarrays
+    for (int i = 0; i < n1; i++) L[i] = v[l + i];
+    for (int j = 0; j < n2; j++) R[j] = v[m + 1 + j];
+
+    int i = 0, j = 0, k = l;
+
+    // Mesclar os subarrays de volta em v[l..r]
+    while (i < n1 && j < n2) {
+        // Comparar e copiar o menor elemento
+        if (compararNomes(L[i].nome, R[j].nome, met) <= 0) {
+            v[k++] = L[i++];
+        } else {
+            v[k++] = R[j++];
+        }
+        // Contabiliza a troca
+        met->trocas++;
+    }
+
+    // Copiar os elementos restantes de L[], se houver
+    while (i < n1) {
+        v[k++] = L[i++];
+        met->trocas++;
+    }
+
+    // Copiar os elementos restantes de R[], se houver
+    while (j < n2) {
+        v[k++] = R[j++];
+        met->trocas++;
+    }
+
+    // Liberar memória alocada
+    free(L);
+    free(R);
+}
+
+// MERGE SORT — ordenação eficiente para comparação
+void mergeSort(Jogador *v, int l, int r, Metricas *met) {
+    if (l < r) {
+        // Dividir o vetor em duas metades
+        int m = (l + r) / 2;
+
+        // Ordenar as duas metades
+        mergeSort(v, l, m, met);
+        mergeSort(v, m + 1, r, met);
+
+        // Mesclar as metades ordenadas
+        merge(v, l, m, r, met);
+    }
+}
+
+// Counting Sort para ordenar jogadores pelos caracteres
 void countingSortChar(Jogador *v, int n, int pos, Metricas *m){
     int count[MAX] = {0};
     Jogador *saida = malloc(n * sizeof(Jogador));
@@ -141,7 +211,7 @@ void countingSortChar(Jogador *v, int n, int pos, Metricas *m){
     free(saida);
 }
 
-// RADIX SORT — ordenando da direita para a esquerda
+// RADIX SORT — ordenando linearmente pelos nomes dos jogadores
 void radixSortNomes(Jogador *v, int n, Metricas *m){
     m->comparacoes = 0;
     m->trocas = 0;
