@@ -13,6 +13,8 @@ typedef struct {
 // Protótipos das funções de ordenação
 char ehAcentuado(unsigned char c1, unsigned char c2);
 void normalizar(char *str);
+int compararNomes(const char *a, const char *b, Metricas *m);
+void bubbleSort(Jogador *v, int n, Metricas *m);
 void countingSortChar(Jogador *v, int n, int pos, Metricas *m);
 void radixSortNomes(Jogador *v, int n, Metricas *m);
 

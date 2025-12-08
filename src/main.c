@@ -10,10 +10,9 @@ int main(int argc, char const *argv[]){
     Jogador *jogadores = NULL;
     int n = carregar_jogadores("data/jogadores.csv", &jogadores);
 
-    Metricas m;
-
+    Metricas m = {0, 0, 0};
     clock_t inicio = clock();
-    radixSortNomes(jogadores, n, &m);
+    bubbleSort(jogadores, n, &m);
     clock_t fim = clock();
 
     double tempo_ms = (double)(fim - inicio) / CLOCKS_PER_SEC * 1000.0;

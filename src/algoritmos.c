@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include "algoritmos.h"
 
-#define MAX 256   // máx. valores de caracteres
+#define MAX 256   // máx. valores de caracteres para counting sort
 
 // Função para mapear caracteres UTF-8 acentuados para suas versões sem acento
 char ehAcentuado(unsigned char c1, unsigned char c2) {
@@ -63,6 +63,40 @@ void normalizar(char *str) {
     strcpy(str, temp);
 }
 
+// Compara nomes normalizando antes
+int compararNomes(const char *a, const char *b, Metricas *m) {
+    char na[128], nb[128];
+    strcpy(na, a);
+    strcpy(nb, b);
+
+    normalizar(na);
+    normalizar(nb);
+
+    m->comparacoes++;
+    return strcmp(na, nb);
+}
+
+void bubbleSort(Jogador *v, int n, Metricas *m) {
+    int trocou = 1;
+
+    for (int i = 0; i < n - 1 && trocou; i++) {
+        trocou = 0;
+
+        for (int j = 0; j < n - i - 1; j++) {
+
+            if (compararNomes(v[j].nome, v[j + 1].nome, m) > 0) {
+                Jogador tmp = v[j];
+                v[j] = v[j + 1];
+                v[j + 1] = tmp;
+
+                m->trocas++;
+                trocou = 1;
+            }
+        }
+    }
+}
+
+
 // Counting Sort para ordenar jogadores pelo caractere de posição 'pos'
 void countingSortChar(Jogador *v, int n, int pos, Metricas *m){
     int count[MAX] = {0};
@@ -108,8 +142,7 @@ void countingSortChar(Jogador *v, int n, int pos, Metricas *m){
 }
 
 // RADIX SORT — ordenando da direita para a esquerda
-void radixSortNomes(Jogador *v, int n, Metricas *m)
-{
+void radixSortNomes(Jogador *v, int n, Metricas *m){
     m->comparacoes = 0;
     m->trocas = 0;
     m->memoria = 0;
