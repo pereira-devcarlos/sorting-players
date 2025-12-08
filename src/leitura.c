@@ -65,3 +65,26 @@ int carregar_jogadores(const char *arquivo, Jogador **vetor) {
     fclose(fp);
     return contador;
 }
+
+void liberar_jogadores(Jogador *vetor) {
+    free(vetor);
+}
+
+int salvar_jogadores(const char *arquivo, Jogador *vetor, int n) {
+    FILE *fp = fopen(arquivo, "w");
+    if (!fp) {
+        printf("Erro ao abrir o arquivo %s para escrita\n", arquivo);
+        return -1;
+    }
+
+    // Escreve o cabeçalho
+    fprintf(fp, "nome,posicao,naturalidade,clube,idade\n");
+
+    // Escreve os dados dos jogadores
+    for (int i = 0; i < n; i++) {
+        fprintf(fp, "%s,%s,%s,%s,%d\n", vetor[i].nome, vetor[i].posicao, vetor[i].naturalidade, vetor[i].clube, vetor[i].idade);
+    }
+
+    fclose(fp);
+    return 0;
+}

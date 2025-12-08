@@ -13,4 +13,10 @@ typedef struct {
 // Função para carregar jogadores a partir de um arquivo externo
 int carregar_jogadores(const char *arquivo, Jogador **vetor);
 
+// Função para liberar memória alocada para o vetor de jogadores
+void liberar_jogadores(Jogador *vetor);
+
+// Função para salvar jogadores em um arquivo externo após ordenação
+int salvar_jogadores(const char *arquivo, Jogador *vetor, int n);
+
 #endif // LEITURA_H

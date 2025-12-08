@@ -9,19 +9,20 @@ int main(int argc, char const *argv[]){
     Jogador *jogadores = NULL;
     int n = carregar_jogadores("data/jogadores.csv", &jogadores);
 
-    if (n <= 0) {
-        printf("Erro ao carregar jogadores.\n");
-        return 1;
+    Metricas m;
+    radixSortNomes(jogadores, n, &m);
+
+    salvar_jogadores("data/saida.txt", jogadores, n);
+
+    for(int i = 0; i < n; i++){
+        printf("%s, %s, %s, %s, %d\n", jogadores[i].nome, jogadores[i].posicao, jogadores[i].naturalidade, jogadores[i].clube, jogadores[i].idade);
     }
 
-    
-    for (int i = 0; i < n; i++) {
-        printf("%s (%d)\n", jogadores[i].nome, jogadores[i].idade);
-    }
-    
-    printf("Carregados %d jogadores.\n", n);
+    printf("Comparacoes: %ld\n", m.comparacoes);
+    printf("Trocas: %ld\n", m.trocas);
+    printf("Memoria: %ld\n", m.memoria);
     
     free(jogadores);
-    
+
     return 0;
 }
