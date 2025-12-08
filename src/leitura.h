@@ -4,6 +4,7 @@
 // Definição da estrutura Jogador
 typedef struct {
     char nome[100];
+    char nome_normalizado[100];
     char posicao[50];
     char naturalidade[100];
     char clube[50];
@@ -12,9 +13,6 @@ typedef struct {
 
 // Função para carregar jogadores a partir de um arquivo externo
 int carregar_jogadores(const char *arquivo, Jogador **vetor);
-
-// Função para liberar memória alocada para o vetor de jogadores
-void liberar_jogadores(Jogador *vetor);
 
 // Função para salvar jogadores em um arquivo externo após ordenação
 int salvar_jogadores(const char *arquivo, Jogador *vetor, int n);

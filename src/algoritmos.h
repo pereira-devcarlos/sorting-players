@@ -11,6 +11,9 @@ typedef struct {
 } Metricas;
 
 // Protótipos das funções de ordenação
+char ehAcentuado(unsigned char c1, unsigned char c2);
+void normalizar(char *str);
+void countingSortChar(Jogador *v, int n, int pos, Metricas *m);
 void radixSortNomes(Jogador *v, int n, Metricas *m);
 
 #endif // ALGORITMOS_H

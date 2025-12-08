@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "leitura.h"
+#include "algoritmos.h"
 
 int carregar_jogadores(const char *arquivo, Jogador **vetor) {
     // Abre o arquivo para leitura
@@ -45,6 +46,8 @@ int carregar_jogadores(const char *arquivo, Jogador **vetor) {
 
         // Copia os dados para a estrutura Jogador
         strcpy((*vetor)[i].nome, token);
+        strcpy((*vetor)[i].nome_normalizado, token); // copia o nome para normalizado
+        normalizar((*vetor)[i].nome_normalizado);
         token = strtok(NULL, ",");
 
         strcpy((*vetor)[i].posicao, token);
@@ -64,10 +67,6 @@ int carregar_jogadores(const char *arquivo, Jogador **vetor) {
 
     fclose(fp);
     return contador;
-}
-
-void liberar_jogadores(Jogador *vetor) {
-    free(vetor);
 }
 
 int salvar_jogadores(const char *arquivo, Jogador *vetor, int n) {
