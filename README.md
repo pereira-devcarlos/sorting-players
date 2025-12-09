@@ -8,16 +8,13 @@ O objetivo deste projeto é implementar e comparar três algoritmos de ordenaç�
 
 ## Objetivo do Projeto
 
-O programa implementa três categorias de algoritmos de ordenação:
+O programa implementa três algoritmos de ordenação:
 
-1. Método simples de ordenação  
-   Exemplos: Bubble Sort, Selection Sort, Insertion Sort
+1. Método simples de ordenação: Bubble Sort.
 
-2. Método ótimo de ordenação  
-   Exemplos: Merge Sort, Quick Sort
+2. Método ótimo de ordenação: Merge Sort.
 
-3. Método de ordenação em tempo linear  
-   Exemplos: Counting Sort, Radix Sort
+3. Método de ordenação em tempo linear: Radix Sort.
 
 O programa também realiza a medição de desempenho, incluindo:
 
@@ -58,14 +55,14 @@ Para executar o programa:
 
 Onde `<modo>` pode ser:
 
-* 1 para o método simples
-* 2 para o método ótimo
-* 3 para o método de tempo linear
+* 1 para o método simples (Bubble Sort)
+* 2 para o método ótimo (Merge Sort)
+* 3 para o método de tempo linear (Radix Sort)
 
 Exemplo:
 
 ```bash
-./programa 2
+./sorter 2
 ```
 ---
 
@@ -80,7 +77,7 @@ Exemplo:
 Após ordenar o vetor de structs, o programa imprime:
 
 1. A lista completa de jogadores ordenados, com todos os campos.
-2. Quatro linhas contendo, respectivamente:
+2. Resultados da medição de desempenho no seguinte formato:
 
 ```
 <tempo_execucao_ms>
@@ -88,23 +85,24 @@ Após ordenar o vetor de structs, o programa imprime:
 <numero_trocas>
 <memoria_utilizada_bytes>
 ```
-
-A ordem deve ser exatamente esta.
-
 ---
 
 ## Estrutura do Repositório
 
 ```
 sorting-players/
+ ┣ data/
+ │ ┣ jogadores.csv
+ │ ┗ jogadores_ordenados.csv
  ┣ src/
  │ ┣ main.c
  │ ┣ leitura.c
  │ ┣ leitura.h
  │ ┣ algoritmos.c
- │ ┣ algoritmos.h
- ┣ jogadores.csv
- ┣ Makefile
+ │ ┗ algoritmos.h
+ ┣ .gitignore
+ ┣ LICENSE
+ ┣ makefile
  ┗ README.md
 ```
 

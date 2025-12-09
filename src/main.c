@@ -40,17 +40,17 @@ int main(int argc, char const *argv[]){
 
     switch (escolha) {
         case 1:
-            // Bubble Sort - Ordenação Simples
+            // Bubble Sort - Metódo Simples
             printf("Executando Bubble Sort...\n");
             bubbleSort(jogadores, n, &m);
             break;
         case 2:
-            // Merge Sort - Ordenação Eficiente
+            // Merge Sort - Metódo Ótimo
             printf("Executando Merge Sort...\n");
             mergeSort(jogadores, 0, n - 1, &m);
             break;
         case 3:
-            // Radix Sort - Ordenação Linear
+            // Radix Sort - Metódo de tempo linear
             printf("Executando Radix Sort...\n");
             radixSortNomes(jogadores, n, &m);
             break;
