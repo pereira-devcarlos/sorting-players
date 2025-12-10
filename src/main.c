@@ -8,7 +8,7 @@
 int main(int argc, char const *argv[]){
     // Verifica se o argumento de opção foi fornecido
     if (argc != 2) {
-        printf("Uso correto: sorter.exe <opcao>\n");
+        printf("Uso correto: sorter <opcao>\n");
         printf("1 - Bubble Sort\n");
         printf("2 - Merge Sort\n");
         printf("3 - Radix Sort\n");
