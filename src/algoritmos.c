@@ -183,7 +183,6 @@ void countingSortChar(Jogador *v, int n, int pos, Metricas *m){
             c = 0; // strings menores recebem prioridade
 
         count[c]++;
-        m->comparacoes++;
     }
 
     // Transformar count em prefix sum
@@ -223,7 +222,6 @@ void radixSortNomes(Jogador *v, int n, Metricas *m){
         int len = strlen(v[i].nome_normalizado);
         if (len > maxLen)
             maxLen = len;
-        m->comparacoes++;
     }
 
     // 2. Rodar counting sort para cada posição de caractere
